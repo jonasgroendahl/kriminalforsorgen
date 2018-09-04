@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+
+</head>
+
+<body>
+
+    <div class="wrapper"></div>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+
+        (async function main() {
+            const result = await axios.get('https://api-wexer.herokuapp.com/v2/rss/kriminalforsorgen');
+            console.log(result.data);
+            result.data.forEach((nyhed, index) => {
+                const div = document.createElement('div');
+                div.classList.add('item');
+                if (index !== 0) {
+                    div.style.opacity = 0;
+                }
+
+                const h1 = document.createElement('h1');
+                h1.textContent = nyhed.title;
+
+                const p = document.createElement('p');
+                p.textContent = nyhed.description;
+
+                const img = document.createElement('img');
+                img.height = 100;
+                img.src = nyhed.img;
+
+                div.appendChild(h1);
+                div.appendChild(img);
+                div.appendChild(p);
+
+                document.querySelector(".wrapper").appendChild(div);
+            });
+            let index = 0;
+            setInterval(function () {
+                document.querySelectorAll('.item').forEach((item, i) => {
+                    if (i === index) {
+                        item.style.opacity = 1;
+                    }
+                    else {
+                        item.style.opacity = 0;
+                    }
+                });
+                index++;
+            }, 2000);
+        })();
+    </script>
+    <style>
+        .flex {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-flow: column wrap;
+        }
+
+        .item {
+            transition: all 0.3s ease-in;
+            position: absolute;
+        }
+    </style>
+</body>
+
+</html>
