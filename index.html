@@ -17,48 +17,49 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
 
-        (async function main() {
-            const result = await axios.get('https://api-wexer.herokuapp.com/v2/rss/kriminalforsorgen');
-            console.log(result.data);
-            const length = result.data.length;
-            result.data.forEach((nyhed, index) => {
-                const div = document.createElement('div');
-                div.classList.add('item');
-                if (index !== 0) {
-                    div.style.opacity = 0;
-                }
-
-                const h1 = document.createElement('h1');
-                h1.textContent = nyhed.title;
-
-                const p = document.createElement('p');
-                p.textContent = nyhed.description;
-
-                const img = document.createElement('img');
-                img.height = 100;
-                img.src = nyhed.img;
-
-                div.appendChild(h1);
-                div.appendChild(img);
-                div.appendChild(p);
-
-                document.querySelector(".wrapper").appendChild(div);
-            });
-            let index = 0;
-            setInterval(function () {
-                document.querySelectorAll('.item').forEach((item, i) => {
-                    if (i === index) {
-                        item.style.opacity = 1;
+        (function main() {
+            axios.get('https://api-wexer.herokuapp.com/v2/rss/kriminalforsorgen').then(function (result) {
+                console.log(result.data);
+                const length = result.data.length;
+                result.data.forEach((nyhed, index) => {
+                    const div = document.createElement('div');
+                    div.classList.add('item');
+                    if (index !== 0) {
+                        div.style.opacity = 0;
                     }
-                    else {
-                        item.style.opacity = 0;
-                    }
+
+                    const h1 = document.createElement('h1');
+                    h1.textContent = nyhed.title;
+
+                    const p = document.createElement('p');
+                    p.textContent = nyhed.description;
+
+                    const img = document.createElement('img');
+                    img.height = 100;
+                    img.src = nyhed.img;
+
+                    div.appendChild(h1);
+                    div.appendChild(img);
+                    div.appendChild(p);
+
+                    document.querySelector(".wrapper").appendChild(div);
                 });
-                index++;
-                if (index === length) {
-                    index = 0;
-                }
-            }, 2000);
+                let index = 0;
+                setInterval(function () {
+                    document.querySelectorAll('.item').forEach((item, i) => {
+                        if (i === index) {
+                            item.style.opacity = 1;
+                        }
+                        else {
+                            item.style.opacity = 0;
+                        }
+                    });
+                    index++;
+                    if (index === length) {
+                        index = 0;
+                    }
+                }, 2000);
+            })
         })();
     </script>
     <style>
