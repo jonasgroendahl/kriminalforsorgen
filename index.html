@@ -14,6 +14,17 @@
 
     <div class="wrapper"></div>
 
+    <script src="https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.min.js"></script>
+    <script>
+        if (window.NodeList && !NodeList.prototype.forEach) {
+            NodeList.prototype.forEach = function (callback, thisArg) {
+                thisArg = thisArg || window;
+                for (var i = 0; i < this.length; i++) {
+                    callback.call(thisArg, this[i], i, this);
+                }
+            };
+        }
+    </script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
 
@@ -46,7 +57,9 @@
                 });
                 let index = 0;
                 setInterval(function () {
-                    document.querySelectorAll('.item').forEach(function (item, i) {
+                    const items = document.querySelectorAll('.item');
+                    console.log(items);
+                    items.forEach(function (item, i) {
                         if (i === index) {
                             item.style.opacity = 1;
                         }
