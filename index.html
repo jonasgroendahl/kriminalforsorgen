@@ -5,8 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-
+    <link href="https://fonts.googleapis.com/css?family=Noto+Serif+KR|Slabo+27px" rel="stylesheet">
+    <title>kriminalforsorgen</title>
+    <script src="http://cdn.date-fns.org/v1.8.0/date_fns.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
 </head>
 
@@ -44,13 +46,19 @@
 
                     const p = document.createElement('p');
                     p.textContent = nyhed.description;
+                    p.className = 'desc';
+
+                    const d = document.createElement('p');
+                    d.textContent = 'Offentliggjort ' + nyhed.pubDate.substr(0,12);
+                    d.className = 'date';
 
                     const img = document.createElement('img');
-                    img.height = 200;
+                    img.width = 200;
                     img.src = nyhed.img;
 
-                    div.appendChild(h1);
+                    div.appendChild(d);
                     div.appendChild(img);
+                    div.appendChild(h1);
                     div.appendChild(p);
 
                     document.querySelector(".wrapper").appendChild(div);
@@ -71,7 +79,7 @@
                     if (index === length) {
                         index = 0;
                     }
-                }, 2000);
+                }, 5000);
             })
         })();
     </script>
@@ -86,6 +94,37 @@
         .item {
             transition: all 0.3s ease-in;
             position: absolute;
+        }
+
+        h1 {
+            font-family: 'Slabo 27px', serif;
+            font-size: 34px;
+            font-weight: normal;
+            margin-top: -10px;
+            margin-bottom: 0px;
+        }
+
+        div {
+            width: 700px;
+        }
+
+        .desc {
+            font-family: 'Slabo 27px', serif;
+            font-size: 18px;
+            font-weight: normal;
+            margin-bottom: 0px;
+            margin-top: 0px;
+        }
+
+        .date {
+            font-family: 'Slabo 27px', serif;
+            font-size: 16px;
+            font-weight: normal;
+            background-color: #76B615;
+            color: white;
+            padding: 10px;
+            margin-bottom: 0px;
+            margin-top: 0px;
         }
     </style>
 </body>
