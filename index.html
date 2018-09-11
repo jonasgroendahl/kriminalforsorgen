@@ -53,12 +53,12 @@
                     d.className = 'date';
 
                     const img = document.createElement('img');
-                    img.width = 200;
+                    img.width = 250;
                     img.src = nyhed.img;
 
                     div.appendChild(d);
-                    div.appendChild(img);
                     div.appendChild(h1);
+                    div.appendChild(img);
                     div.appendChild(p);
 
                     document.querySelector(".wrapper").appendChild(div);
@@ -92,33 +92,35 @@
 
         h1 {
             font-family: 'Slabo 27px', serif;
-            font-size: 34px;
+            font-size: 40px;
             font-weight: normal;
-            margin-top: 8px;
+            margin-top: 12px;
             margin-bottom: 0px;
         }
 
         img {
-            float: right;
-            padding-left: 10px;
-            padding-top: 10px;
+            float: left;
+            padding-right: 10px;
+            padding-top: -4px;
         }
 
         div {
-            width: 700px;
+            width: 840px;
+            height: 420px;
         }
 
         .desc {
             font-family: 'Slabo 27px', serif;
-            font-size: 18px;
+            font-size: 24px;
             font-weight: normal;
             margin-bottom: 0px;
-            margin-top: 10px;
+            margin-top: 30px;
+            line-height: 1.4;
         }
 
         .date {
             font-family: 'Slabo 27px', serif;
-            font-size: 16px;
+            font-size: 20px;
             font-weight: normal;
             background-color: #76B615;
             color: white;
