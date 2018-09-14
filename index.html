@@ -22,7 +22,9 @@
             NodeList.prototype.forEach = function (callback, thisArg) {
                 thisArg = thisArg || window;
                 for (var i = 0; i < this.length; i++) {
-                    callback.call(thisArg, this[i], i, this);
+                    if (i <= 4) {
+                        callback.call(thisArg, this[i], i, this);
+                    }
                 }
             };
         }
@@ -49,7 +51,7 @@
                     p.className = 'desc';
 
                     const d = document.createElement('p');
-                    d.textContent = 'Offentliggjort ' + nyhed.pubDate.substr(0,12);
+                    d.textContent = 'Fra Kriminalforsorgen.dk ' + nyhed.pubDate.substr(0,12);
                     d.className = 'date';
 
                     const img = document.createElement('img');
