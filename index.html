@@ -22,9 +22,7 @@
             NodeList.prototype.forEach = function (callback, thisArg) {
                 thisArg = thisArg || window;
                 for (var i = 0; i < this.length; i++) {
-                    if (i <= 4) {
-                        callback.call(thisArg, this[i], i, this);
-                    }
+                    callback.call(thisArg, this[i], i, this);
                 }
             };
         }
@@ -37,33 +35,70 @@
                 console.log(result.data);
                 const length = result.data.length;
                 result.data.forEach(function (nyhed, index) {
-                    const div = document.createElement('div');
-                    div.classList.add('item');
-                    if (index !== 0) {
-                        div.style.opacity = 0;
-                    }
+                        const div = document.createElement('div');
+                        div.classList.add('item');
+                        if (index !== 0) {
+                            div.style.opacity = 0;
+                        }
 
-                    const h1 = document.createElement('h1');
-                    h1.textContent = nyhed.title;
+                        const h1 = document.createElement('h1');
+                        h1.textContent = nyhed.title;
 
-                    const p = document.createElement('p');
-                    p.textContent = nyhed.description;
-                    p.className = 'desc';
+                        const p = document.createElement('p');
+                        p.textContent = nyhed.description;
+                        p.className = 'desc';
 
-                    const d = document.createElement('p');
-                    d.textContent = 'Fra Kriminalforsorgen.dk ' + nyhed.pubDate.substr(0,12);
-                    d.className = 'date';
+                        const d = document.createElement('p');
+                        let month = '';
+                        if (nyhed.pubDate.substr(0,3) == 'Jan') {
+                            month = 'januar';
+                        } else
+                        if (nyhed.pubDate.substr(0,3) == 'Feb') {
+                            month = 'februar';
+                        } else
+                        if (nyhed.pubDate.substr(0,3) == 'Mar') {
+                            month = 'marts';
+                        } else
+                        if (nyhed.pubDate.substr(0,3) == 'Apr') {
+                            month = 'april';
+                        } else
+                        if (nyhed.pubDate.substr(0,3) == 'Maj') {
+                            month = 'maj';
+                        } else
+                        if (nyhed.pubDate.substr(0,3) == 'Jun') {
+                            month = 'juni';
+                        } else
+                        if (nyhed.pubDate.substr(0,3) == 'Jul') {
+                            month = 'juli';
+                        } else
+                        if (nyhed.pubDate.substr(0,3) == 'Aug') {
+                            month = 'august';
+                        } else
+                        if (nyhed.pubDate.substr(0,3) == 'Sep') {
+                            month = 'september';
+                        } else
+                        if (nyhed.pubDate.substr(0,3) == 'Okt') {
+                            month = 'oktober';
+                        } else
+                        if (nyhed.pubDate.substr(0,3) == 'Nov') {
+                            month = 'november';
+                        } else
+                        if (nyhed.pubDate.substr(0,3) == 'Dec') {
+                            month = 'december';
+                        }
+                        d.textContent = 'Fra Kriminalforsorgen.dk - '+nyhed.pubDate.substr(4,2)+'. '+month+' '+nyhed.pubDate.substr(8,4);
+                        d.className = 'date';
 
-                    const img = document.createElement('img');
-                    img.width = 250;
-                    img.src = nyhed.img;
+                        const img = document.createElement('img');
+                        img.width = 250;
+                        img.src = nyhed.img;
 
-                    div.appendChild(d);
-                    div.appendChild(h1);
-                    div.appendChild(img);
-                    div.appendChild(p);
+                        div.appendChild(d);
+                        div.appendChild(h1);
+                        div.appendChild(img);
+                        div.appendChild(p);
 
-                    document.querySelector(".wrapper").appendChild(div);
+                        document.querySelector(".wrapper").appendChild(div);
                 });
                 let index = 0;
                 setInterval(function () {
@@ -79,6 +114,9 @@
                     });
                     index++;
                     if (index === length) {
+                        index = 0;
+                    }
+                    if (index == 5) {
                         index = 0;
                     }
                 }, 15000);
